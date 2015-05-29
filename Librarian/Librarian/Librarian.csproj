@@ -185,6 +185,18 @@
     <Compile Include="Migrations\201505290713213_AddLibraryAndBookRelation.Designer.cs">
       <DependentUpon>201505290713213_AddLibraryAndBookRelation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505291051256_Update-user-table.cs" />
+    <Compile Include="Migrations\201505291051256_Update-user-table.Designer.cs">
+      <DependentUpon>201505291051256_Update-user-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505291344232_Change-User-DB.cs" />
+    <Compile Include="Migrations\201505291344232_Change-User-DB.Designer.cs">
+      <DependentUpon>201505291344232_Change-User-DB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505291459589_final.cs" />
+    <Compile Include="Migrations\201505291459589_final.Designer.cs">
+      <DependentUpon>201505291459589_final.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -222,7 +234,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -306,6 +320,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505290713213_AddLibraryAndBookRelation.resx">
       <DependentUpon>201505290713213_AddLibraryAndBookRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505291051256_Update-user-table.resx">
+      <DependentUpon>201505291051256_Update-user-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505291344232_Change-User-DB.resx">
+      <DependentUpon>201505291344232_Change-User-DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505291459589_final.resx">
+      <DependentUpon>201505291459589_final.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

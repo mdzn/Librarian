@@ -3,6 +3,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+using System;
 
 namespace Librarian.Models
 {
@@ -15,6 +18,44 @@ namespace Librarian.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             return userIdentity;
+        }
+
+        [Display(Name = "First name")]
+        public string FName { get; set; }
+
+        [Display(Name = "Last name")]
+        public string LName { get; set; }
+
+
+        public string Sex { get; set; }
+
+        [Display(Name = "Date of birth")]
+        public DateTime DOB { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+
+        
+        [Display(Name = "Postal Code")]
+        public string PostalCode { get; set; }
+
+        // Concatenate the address info for display in tables and such:
+        public string DisplayAddress
+        {
+            get
+            {
+                string dspAddress =
+                    string.IsNullOrWhiteSpace(this.Address) ? "" : this.Address;
+                string dspCity =
+                    string.IsNullOrWhiteSpace(this.City) ? "" : this.City;
+                string dspState =
+                    string.IsNullOrWhiteSpace(this.State) ? "" : this.State;
+                string dspPostalCode =
+                    string.IsNullOrWhiteSpace(this.PostalCode) ? "" : this.PostalCode;
+
+                return string
+                    .Format("{0} {1} {2} {3}", dspAddress, dspCity, dspState, dspPostalCode);
+            }
         }
     }
 

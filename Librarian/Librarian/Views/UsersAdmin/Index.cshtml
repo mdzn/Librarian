@@ -12,7 +12,20 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.FName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sex)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        @*Add a table header for the Address info:*@
+        <th>
+            @Html.DisplayNameFor(model => model.DisplayAddress)
         </th>
         <th>
 
@@ -23,7 +36,20 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sex)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @*Add table data for the Address info:*@
+                @Html.DisplayFor(modelItem => item.DisplayAddress)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

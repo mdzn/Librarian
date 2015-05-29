@@ -117,6 +117,7 @@ namespace Librarian.Models
             const string name = "saidhdr@gmail.com";
             const string password = "123456";
             const string roleName = "Admin";
+            const string roleNameUser = "User";
 
             //Create Role Admin if it does not exist
             var role = roleManager.FindByName(roleName);
@@ -125,9 +126,19 @@ namespace Librarian.Models
                 var roleresult = roleManager.Create(role);
             }
 
+            //Create Role User if it does not exist
+            var roleUser = roleManager.FindByName(roleNameUser);
+            if (roleUser == null)
+            {
+                roleUser = new IdentityRole(roleNameUser);
+                var roleresult = roleManager.Create(roleUser);
+            }
+
             var user = userManager.FindByName(name);
             if (user == null) {
-                user = new ApplicationUser { UserName = name, Email = name };
+                user = new ApplicationUser { UserName = name, Email = name, FName = "Bruce",LName = "Waine" ,
+                                             Sex = "Male", DOB=DateTime.Now,State="Arkahm", City = "Arkahm",
+                                              Address = "Arkahm", PostalCode= "123456"};
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }

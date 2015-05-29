@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Librarian.Models
@@ -76,6 +77,26 @@ namespace Librarian.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
+        [Display(Name = "First name")]
+        public string FName { get; set; }
+
+        [Display(Name = "Last name")]
+        public string LName { get; set; }
+
+        public string Sex { get; set; }
+
+        [Display(Name = "Date of birth")]
+        public DateTime DOB { get; set; }
+
+        // Add the new address properties:
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+
+        [Display(Name = "Postal Code")]
+        public string PostalCode { get; set; }
     }
 
     public class ResetPasswordViewModel

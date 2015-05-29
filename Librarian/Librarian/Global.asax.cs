@@ -21,7 +21,7 @@ namespace Librarian
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 #if DEBUG
-           // Database.SetInitializer<Appl>(new ApplicationDbContext.DropCreateAlwaysInitializer());
+           // Database.SetInitializer<ApplicationDbContext>(null);
 #endif
         }
     }

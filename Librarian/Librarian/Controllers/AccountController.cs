@@ -19,10 +19,11 @@ namespace Librarian.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
         }
 
         private ApplicationUserManager _userManager;
@@ -35,6 +36,20 @@ namespace Librarian.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
             }
         }
 
@@ -149,7 +164,11 @@ namespace Librarian.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address= model.Address,
+                                                 City=model.City, State = model.State, PostalCode = model.PostalCode,
+                                                 Sex = model.Sex, DOB = model.DOB, FName = model.FName, LName = model.LName};
+
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -157,6 +176,7 @@ namespace Librarian.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     ViewBag.Link = callbackUrl;
+                   
                     return View("DisplayEmail");
                 }
                 AddErrors(result);
