@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,9 @@ namespace Librarian.Models
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     public DateTime ReleaseDate { get; set; }
     public string ISBN { get; set; }
+
+    [NotMapped]
+    public int Rating { get; set; }
 
     public virtual ICollection<Review> Reviews { get; set; }
     public override string ToString()

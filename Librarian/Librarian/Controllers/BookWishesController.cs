@@ -10,126 +10,108 @@ using Librarian.Models;
 
 namespace Librarian.Controllers
 {
-    public class LibrariesController : Controller
+    public class BookWishesController : Controller
     {
         private LibrarianDBContext db = new LibrarianDBContext();
 
-        /// <summary>
-        /// GET: Libraries.
-        /// 
-        /// If user is admin, display all available library.
-        /// If library is public, put it into display
-        /// If library is private but the current user is the owner, put it into display
-        /// </summary>
+        // GET: BookWishes
         public ActionResult Index()
         {
-          var libraries = new List<Library>();
-
-          foreach (var library in db.Libraries)
-            {
-            if (library.IsPublic || User.IsInRole("Admin"))
-              libraries.Add(library);
-            else if (library.UserId.Equals(User.Identity.Name, StringComparison.OrdinalIgnoreCase))
-              libraries.Add(library);
-            }
-
-          return View(libraries.ToList());
-
-            //var userLibraries = db.Libraries.Where(lib => lib.UserId == User.Identity.Name).ToList();
-            //return View(userLibraries);
+            return View(db.BookWishes.ToList());
         }
 
-        // GET: Libraries/Details/5
+        // GET: BookWishes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Library library = db.Libraries.Find(id);
-            if (library == null)
+            BookWish bookWish = db.BookWishes.Find(id);
+            if (bookWish == null)
             {
                 return HttpNotFound();
             }
-            return View(library);
+
+            return View(bookWish);
         }
 
-        // GET: Libraries/Create
+        // GET: BookWishes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Libraries/Create
+        // POST: BookWishes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,UserId")] Library library)
+        public ActionResult Create([Bind(Include = "Id,RequestedBy,BookTitle")] BookWish bookWish)
         {
             if (ModelState.IsValid)
             {
-                db.Libraries.Add(library);
+                db.BookWishes.Add(bookWish);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(library);
+            return View(bookWish);
         }
 
-        // GET: Libraries/Edit/5
+        // GET: BookWishes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Library library = db.Libraries.Find(id);
-            if (library == null)
+            BookWish bookWish = db.BookWishes.Find(id);
+            if (bookWish == null)
             {
                 return HttpNotFound();
             }
-            return View(library);
+            return View(bookWish);
         }
 
-        // POST: Libraries/Edit/5
+        // POST: BookWishes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,UserId")] Library library)
+        public ActionResult Edit([Bind(Include = "Id,RequestedBy,BookTitle")] BookWish bookWish)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(library).State = EntityState.Modified;
+                db.Entry(bookWish).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(library);
+            return View(bookWish);
         }
 
-        // GET: Libraries/Delete/5
+        // GET: BookWishes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Library library = db.Libraries.Find(id);
-            if (library == null)
+            BookWish bookWish = db.BookWishes.Find(id);
+            if (bookWish == null)
             {
                 return HttpNotFound();
             }
-            return View(library);
+            return View(bookWish);
         }
 
-        // POST: Libraries/Delete/5
+        // POST: BookWishes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Library library = db.Libraries.Find(id);
-            db.Libraries.Remove(library);
+            BookWish bookWish = db.BookWishes.Find(id);
+            db.BookWishes.Remove(bookWish);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

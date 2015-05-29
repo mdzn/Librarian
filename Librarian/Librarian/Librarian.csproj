@@ -160,6 +160,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\BookWishesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibrariesController.cs" />
     <Compile Include="Controllers\LibraryBooksController.cs" />
@@ -171,14 +172,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201505291946406_InitialCreate.cs" />
-    <Compile Include="Migrations\201505291946406_InitialCreate.Designer.cs">
-      <DependentUpon>201505291946406_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201505292117118_InitialCreate.cs" />
+    <Compile Include="Migrations\201505292117118_InitialCreate.Designer.cs">
+      <DependentUpon>201505292117118_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505292136582_AddBookWish.cs" />
+    <Compile Include="Migrations\201505292136582_AddBookWish.Designer.cs">
+      <DependentUpon>201505292136582_AddBookWish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505292233306_update_library_table.cs" />
+    <Compile Include="Migrations\201505292233306_update_library_table.Designer.cs">
+      <DependentUpon>201505292233306_update_library_table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\BookWish.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LibrarianDBContext.cs" />
     <Compile Include="Models\Library.cs">
@@ -285,6 +295,15 @@
     <Content Include="Views\Reviews\Details.cshtml" />
     <Content Include="Views\Reviews\Edit.cshtml" />
     <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\BookWishes\Create.cshtml" />
+    <Content Include="Views\BookWishes\Delete.cshtml" />
+    <Content Include="Views\BookWishes\Details.cshtml" />
+    <Content Include="Views\BookWishes\Edit.cshtml" />
+    <Content Include="Views\BookWishes\Index.cshtml" />
+    <Content Include="Views\Transaction\CheckIn.cshtml" />
+    <Content Include="Views\Shared\_Review.cshtml" />
+    <Content Include="Views\Shared\_Transaction.cshtml" />
+    <Content Include="Views\Shared\_AddReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -297,8 +316,14 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505291946406_InitialCreate.resx">
-      <DependentUpon>201505291946406_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505292117118_InitialCreate.resx">
+      <DependentUpon>201505292117118_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505292136582_AddBookWish.resx">
+      <DependentUpon>201505292136582_AddBookWish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505292233306_update_library_table.resx">
+      <DependentUpon>201505292233306_update_library_table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

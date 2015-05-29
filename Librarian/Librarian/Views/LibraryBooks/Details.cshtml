@@ -7,28 +7,34 @@
 <h2>Details</h2>
 
 <div>
-    <h4>LibraryBook</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Book.Title)
-        </dt>
+  <h4>LibraryBook</h4>
+  <hr />
+  <dl class="dl-horizontal">
+    <dt>
+      @Html.DisplayNameFor(model => model.Book.Title)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Book.Title)
-        </dd>
+    <dd>
+      @Html.DisplayFor(model => model.Book.Title)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsAvailable)
-        </dt>
+    <dt>
+      @Html.DisplayNameFor(model => model.IsAvailable)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsAvailable)
-        </dd>
+    <dd>
+      @Html.DisplayFor(model => model.IsAvailable)
+    </dd>
 
-    </dl>
+  </dl>
+</div>
+<div>
+  @foreach (var t in Model.Transactions)
+  {
+    Html.RenderPartial("~/Views/Shared/_Transaction.cshtml", t);
+  }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", new { id = ViewBag.LibraryId })
+    @Html.ActionLink("Back to List", "Index", new { id = Model.LibraryId })
 </p>

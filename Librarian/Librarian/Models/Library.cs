@@ -10,11 +10,8 @@ namespace Librarian.Models
     {
     public int Id { get; set; }
     public string Name { get; set; }
-   
-
-
-
     public string UserId { get; set; } // FK for user
+    public bool IsPublic { get; set; }
 
    // [ForeignKey("UserId")]
     //public virtual ApplicationUser ApplicationUser { get; set; }

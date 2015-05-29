@@ -24,7 +24,7 @@ namespace Librarian.Controllers
       var libraryBooks = from b in db.LibraryBooks select b;
       libraryBooks = libraryBooks.Where(b => b.Library.Id == id);
 
-      UpdateLibraryId(id.Value);
+      ViewBag.LibraryId = id.Value;
       return View(libraryBooks.ToList());
       }
 
@@ -41,8 +41,7 @@ namespace Librarian.Controllers
         {
         return HttpNotFound();
         }
-
-      UpdateLibraryId(id.Value);
+      
       UpdateViewBagBookSelection();
       return View(libraryBook);
       }
@@ -56,8 +55,6 @@ namespace Librarian.Controllers
         LibraryId = id,
         Library = library
       };
-
-      UpdateLibraryId(id);
       UpdateViewBagBookSelection();
       return View(libraryBook);
       }
@@ -92,8 +89,6 @@ namespace Librarian.Controllers
         {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
-
-      UpdateLibraryId(id.Value);
       LibraryBook libraryBook = db.LibraryBooks.Find(id);
       if (libraryBook == null)
         {
@@ -127,7 +122,6 @@ namespace Librarian.Controllers
         {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
-      UpdateLibraryId(id.Value);
       LibraryBook libraryBook = db.LibraryBooks.Find(id);
       if (libraryBook == null)
         {
@@ -141,7 +135,6 @@ namespace Librarian.Controllers
     [ValidateAntiForgeryToken]
     public ActionResult DeleteConfirmed(int id)
     {
-      UpdateLibraryId(id);
       LibraryBook libraryBook = db.LibraryBooks.Find(id);
       db.LibraryBooks.Remove(libraryBook);
       db.SaveChanges();
@@ -160,11 +153,6 @@ namespace Librarian.Controllers
     private void UpdateViewBagBookSelection()
       {
       ViewBag.bookList = new SelectList(from b in db.Books select b, "Id", "Title");
-      }
-
-    private void UpdateLibraryId(int libraryId)
-      {
-      ViewBag.LibraryId = libraryId;
       }
     }
   }

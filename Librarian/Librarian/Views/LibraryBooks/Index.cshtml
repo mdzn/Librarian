@@ -25,7 +25,8 @@
     {
     <tr>
       <td>
-        @Html.DisplayFor(modelItem => item.Book.Title)
+        @*@Html.DisplayFor(modelItem => item.Book.Title)*@
+        @Html.ActionLink(item.Book.Title, "Details", "Books", new { id = item.Id }, new {area = ""})
       </td>
       <td>
         @Html.DisplayFor(modelItem => item.IsAvailable)
@@ -42,7 +43,7 @@
 }
       </td>
       <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
         @Html.ActionLink("Details", "Details", new { id = item.Id }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
       </td>

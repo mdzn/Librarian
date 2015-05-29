@@ -18,5 +18,8 @@ namespace Librarian.Models
 
     [ForeignKey("LibraryId ")]
     public virtual Library Library { get; set; }
+
+    [NotMapped]
+    public ICollection<Transaction> Transactions { get; set; }
     }
   }

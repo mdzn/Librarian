@@ -54,25 +54,33 @@ namespace Librarian.Migrations
       var library1 = new Library
       {
         Name = "Main Library",
-        UserId = "admin@gmail.com"
+        UserId = "admin@gmail.com",
+        IsPublic = true,
       };
 
       var library2 = new Library
       {
         Name = "Madzirin",
-        UserId = "madz@gmail.com"
+        UserId = "madz@gmail.com",
+        IsPublic = true,
       };
 
       var library3 = new Library
       {
         Name = "Heidari",
-        UserId = "heidari@gmail.com"
+        UserId = "heidari@gmail.com",
+        IsPublic = true,
       };
+
+      context.Reviews.Create();
+      context.LibraryBooks.Create();
+      context.Libraries.Create();
+      context.Books.Create();
 
       context.Books.AddOrUpdate(i => i.Title, book1, book2, book3);
       context.Libraries.AddOrUpdate(i => i.Name, library1, library2, library3);
 
-      context.LibraryBooks.AddOrUpdate(
+      context.LibraryBooks.AddOrUpdate(i => i.Id,
         new LibraryBook
         {
           BookId = book1.Id,
@@ -103,6 +111,32 @@ namespace Librarian.Migrations
           LibraryId = library1.Id,
           Library = library1,
           IsAvailable = true
+        }
+        );
+
+      context.Reviews.AddOrUpdate(i => i.Id,
+        new Review
+        {
+          BookId = book1.Id,
+          Book = book1,
+          Content = "Nice book"
+        }, new Review
+        {
+          BookId = book2.Id,
+          Book = book2,
+          Content = "Mediocre"
+        },
+        new Review
+        {
+          BookId = book3.Id,
+          Book = book3,
+          Content = "Weird"
+        },
+        new Review
+        {
+          BookId = book2.Id,
+          Book = book2,
+          Content = "Content is not very clear."
         }
         );
       }

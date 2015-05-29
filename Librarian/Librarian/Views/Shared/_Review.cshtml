@@ -1,0 +1,11 @@
+﻿@model Librarian.Models.Review
+
+<div>
+  <hr />
+  <h5>User ~ @Html.DisplayFor(model => model.UserId)</h5>
+  <p>@Html.DisplayFor(model => model.Content)</p>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>
