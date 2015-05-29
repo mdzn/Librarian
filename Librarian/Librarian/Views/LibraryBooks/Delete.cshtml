@@ -12,45 +12,12 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.LibraryId)
+            @Html.DisplayNameFor(model => model.Book)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LibraryId)
+            @Html.DisplayFor(model => model.Book)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BookId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BookId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CheckOut)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CheckOut)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CheckIn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CheckIn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CheckedOutBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CheckedOutBy)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
@@ -58,7 +25,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Index", new { id = ViewBag.LibraryId })
         </div>
     }
 </div>

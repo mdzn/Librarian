@@ -1,57 +1,41 @@
-﻿@model IEnumerable<Librarian.Models.LibraryBook>
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<Librarian.Models.LibraryBook>
 
 @{
-    ViewBag.Title = "Index";
+  ViewBag.Title = "List of Books";
 }
 
-<h2>Index</h2>
+<h2>List of Books</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+  @Html.ActionLink("Create New", "Create", new {id = ViewBag.LibraryId})
 </p>
 <table class="table">
+  <tr>
+    <th>
+      @Html.DisplayNameFor(model => model.Book.Title)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.IsAvailable)
+    </th>
+    <th></th>
+  </tr>
+  
+  @foreach (var item in Model)
+    {
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.LibraryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CheckOut)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CheckIn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CheckedOutBy)
-        </th>
-        <th></th>
+      <td>
+        @Html.DisplayFor(modelItem => item.Book.Title)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.IsAvailable)
+      </td>
+      <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+      </td>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LibraryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BookId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CheckOut)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CheckIn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CheckedOutBy)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    }
 
 </table>

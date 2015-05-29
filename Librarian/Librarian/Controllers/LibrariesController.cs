@@ -20,11 +20,6 @@ namespace Librarian.Controllers
             return View(db.Libraries.ToList());
         }
 
-      public void Library(int id)
-      {
-        //return Re
-      }
-
         // GET: Libraries/Details/5
         public ActionResult Details(int? id)
         {

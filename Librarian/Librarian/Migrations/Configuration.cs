@@ -30,34 +30,80 @@ namespace Librarian.Migrations
       //    );
       //
 
-      context.Books.AddOrUpdate(i => i.Title,
-            new Book
-            {
-              Title = "The Amazing Book",
-              ReleaseDate = DateTime.Parse("1989-1-11"),
-              ISBN = "2312312345"
-            },
+      var book1 = new Book
+      {
+        Title = "The Amazing Book",
+        ReleaseDate = DateTime.Parse("1989-1-11"),
+        ISBN = "2312312345"
+      };
 
-             new Book
-             {
-               Title = "Nothing is Everything",
-               ReleaseDate = DateTime.Parse("1984-3-13"),
-               ISBN = "6993345909"
-             },
+      var book2 = new Book
+      {
+        Title = "Nothing is Everything",
+        ReleaseDate = DateTime.Parse("1984-3-13"),
+        ISBN = "6993345909"
+      };
 
-             new Book
-             {
-               Title = "MVC for Dummy",
-               ReleaseDate = DateTime.Parse("1986-2-23"),
-               ISBN = "2324557765"
-             },
+      var book3 = new Book
+      {
+        Title = "Sequential",
+        ReleaseDate = DateTime.Parse("1959-4-15"),
+        ISBN = "2345565678"
+      };
 
-           new Book
-           {
-             Title = "Sequential",
-             ReleaseDate = DateTime.Parse("1959-4-15"),
-             ISBN = "2345565678"
-           }
+      var library1 = new Library
+      {
+        Name = "Main Library",
+        UserId = 1
+      };
+
+      var library2 = new Library
+      {
+        Name = "Madzirin",
+        UserId = 2
+      };
+
+      var library3 = new Library
+      {
+        Name = "Heidari",
+        UserId = 3
+      };
+
+      context.Books.AddOrUpdate(i => i.Title, book1, book2, book3);
+      context.Libraries.AddOrUpdate(i => i.Name, library1, library2, library3);
+
+      context.LibraryBooks.AddOrUpdate(
+        new LibraryBook
+        {
+          BookId = book1.Id,
+          Book = book1,
+          LibraryId = library1.Id,
+          Library = library1,
+          IsAvailable = true
+        }, new LibraryBook
+        {
+          BookId = book2.Id,
+          Book = book2,
+          LibraryId = library2.Id,
+          Library = library2,
+          IsAvailable = true
+        },
+        new LibraryBook
+        {
+          BookId = book3.Id,
+          Book = book3,
+          LibraryId = library3.Id,
+          Library = library3,
+          IsAvailable = true
+        },
+        new LibraryBook
+        {
+          BookId = book2.Id,
+          Book = book2,
+          LibraryId = library1.Id,
+          Library = library1,
+          IsAvailable = true
+        }
         );
       }
     }
