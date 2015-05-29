@@ -11,5 +11,8 @@ namespace Librarian.Models
     public DbSet<Book> Books { get; set; }
     public DbSet<Library> Libraries { get; set; }
     public DbSet<LibraryBook> LibraryBooks { get; set; }
+
+    public DbSet<Transaction> Transactions { get; set; }
+
     }
   }

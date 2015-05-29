@@ -20,6 +20,8 @@ namespace Librarian.Models
             return userIdentity;
         }
 
+        //public int Id { get; set; }
+
         [Display(Name = "First name")]
         public string FName { get; set; }
 
@@ -59,11 +61,13 @@ namespace Librarian.Models
         }
     }
 
+    //public class ApplicationDbContext : IdentityDbContext<ApplicationUser,IdentityUserRole,int,IdentityUserLogin,ApplicationRoleManager,IdentityUserClaim>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
             : base("LibrarianDBContext", throwIfV1Schema: false)
         {
+           
         }
 
         static ApplicationDbContext()
@@ -72,10 +76,21 @@ namespace Librarian.Models
             // This seeds the database with admin user credentials and admin role
             Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
         }
-
+        // Domain Model
+      
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //   // base.OnModelCreating(modelBuilder);
+        //    modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+        //    modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+        //    modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+        //    modelBuilder.Entity<Library>().HasKey<string>(l => l.UserId);
+        //    base.OnModelCreating(modelBuilder);
+        //}
     }
 }
