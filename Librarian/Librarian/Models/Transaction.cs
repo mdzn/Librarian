@@ -10,7 +10,7 @@ namespace Librarian.Models
     {
     public int Id { get; set; }
 
-    [ForeignKey("LibraryBookId")]
+    //[ForeignKey("LibraryBookId")]
     public virtual LibraryBook LibraryBook { get; set; }
     public DateTime CheckOut { get; set; }
     public DateTime CheckIn { get; set; }

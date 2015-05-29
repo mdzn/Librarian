@@ -16,7 +16,7 @@ namespace Librarian.Models
 
     public string UserId { get; set; } // FK for user
 
-    [ForeignKey("UserId")]
-    public virtual ApplicationUser ApplicationUser { get; set; }
+   // [ForeignKey("UserId")]
+    //public virtual ApplicationUser ApplicationUser { get; set; }
     }
   }

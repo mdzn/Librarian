@@ -17,7 +17,11 @@ namespace Librarian.Controllers
         // GET: Libraries
         public ActionResult Index()
         {
-            return View(db.Libraries.ToList());
+            if (User.IsInRole("Admin"))
+                return View(db.Libraries.ToList());
+
+            var userLibraries = db.Libraries.Where(lib => lib.UserId == User.Identity.Name).ToList();
+            return View(userLibraries);
         }
 
         // GET: Libraries/Details/5

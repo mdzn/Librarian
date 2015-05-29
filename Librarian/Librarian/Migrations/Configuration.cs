@@ -54,19 +54,19 @@ namespace Librarian.Migrations
       var library1 = new Library
       {
         Name = "Main Library",
-        UserId = "1"
+        UserId = "admin@gmail.com"
       };
 
       var library2 = new Library
       {
         Name = "Madzirin",
-        UserId = "2"
+        UserId = "madz@gmail.com"
       };
 
       var library3 = new Library
       {
         Name = "Heidari",
-        UserId = "3"
+        UserId = "heidari@gmail.com"
       };
 
       context.Books.AddOrUpdate(i => i.Title, book1, book2, book3);

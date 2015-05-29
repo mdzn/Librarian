@@ -29,6 +29,17 @@
       </td>
       <td>
         @Html.DisplayFor(modelItem => item.IsAvailable)
+          @{
+        if (item.IsAvailable)
+        {
+           
+            @Html.ActionLink("Check out", "CheckOut", "Transaction",  new { id = item.Id },new { area = "" })
+        }
+        else
+        {
+            @Html.ActionLink("Check in", "CheckIn", "Transaction", new { id = item.Id }, new { area = "" })
+        }
+}
       </td>
       <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
