@@ -10,8 +10,6 @@ namespace Librarian.Models
   public class Book
     {
     public int Id { get; set; }
-
-
     public string Title { get; set; }
 
     [Display(Name = "Release Date")]
@@ -20,6 +18,7 @@ namespace Librarian.Models
     public DateTime ReleaseDate { get; set; }
     public string ISBN { get; set; }
 
+    public virtual ICollection<Review> Reviews { get; set; }
     public override string ToString()
       {
       return Title;

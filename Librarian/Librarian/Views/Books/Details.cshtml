@@ -7,34 +7,50 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+  <h4>Book</h4>
+  <hr />
+  <dl class="dl-horizontal">
+    <dt>
+      @Html.DisplayNameFor(model => model.Title)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+    <dd>
+      @Html.DisplayFor(model => model.Title)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </dt>
+    <dt>
+      @Html.DisplayNameFor(model => model.ReleaseDate)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </dd>
+    <dd>
+      @Html.DisplayFor(model => model.ReleaseDate)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </dt>
+    <dt>
+      @Html.DisplayNameFor(model => model.ISBN)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ISBN)
-        </dd>
+    <dd>
+      @Html.DisplayFor(model => model.ISBN)
+    </dd>
 
-    </dl>
+  </dl>
+</div>
+<div>
+  <h3>Reviews</h3>
+  Add Review : @Html.TextBox("Review") <br />
+  <input type="button" value="Add Review" onclick="location.href='>@Url.Action("PostReview")" />
+
+  <dl class="dl-horizontal">
+    @foreach (var r in Model.Reviews)
+    {
+      <dt>
+        @Html.DisplayFor(modelItem => r.Content)
+      </dt>
+    }
+  </dl>
+  
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

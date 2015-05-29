@@ -39,6 +39,7 @@ namespace Librarian.Controllers
         {
         return HttpNotFound();
         }
+      book.Reviews = db.Reviews.Where(r => r.BookId == book.Id).ToList();
       return View(book);
       }
 
@@ -121,6 +122,11 @@ namespace Librarian.Controllers
       db.SaveChanges();
       return RedirectToAction("Index");
       }
+
+    public ActionResult PostReview(string content)
+    {
+      return null;
+    }
 
     protected override void Dispose(bool disposing)
       {
