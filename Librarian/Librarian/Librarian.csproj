@@ -159,16 +159,44 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LibrariesController.cs" />
+    <Compile Include="Controllers\LibraryBooksController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505290407594_InitialCreate.cs" />
+    <Compile Include="Migrations\201505290407594_InitialCreate.Designer.cs">
+      <DependentUpon>201505290407594_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505290646166_ChangeISDNtoISBN.cs" />
+    <Compile Include="Migrations\201505290646166_ChangeISDNtoISBN.Designer.cs">
+      <DependentUpon>201505290646166_ChangeISDNtoISBN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505290710531_AddLibraryTable.cs" />
+    <Compile Include="Migrations\201505290710531_AddLibraryTable.Designer.cs">
+      <DependentUpon>201505290710531_AddLibraryTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505290713213_AddLibraryAndBookRelation.cs" />
+    <Compile Include="Migrations\201505290713213_AddLibraryAndBookRelation.Designer.cs">
+      <DependentUpon>201505290713213_AddLibraryAndBookRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Book.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LibrarianDBContext.cs" />
+    <Compile Include="Models\Library.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\LibraryBook.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -229,6 +257,21 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Books\Create.cshtml" />
+    <Content Include="Views\Books\Delete.cshtml" />
+    <Content Include="Views\Books\Details.cshtml" />
+    <Content Include="Views\Books\Edit.cshtml" />
+    <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Libraries\Create.cshtml" />
+    <Content Include="Views\Libraries\Delete.cshtml" />
+    <Content Include="Views\Libraries\Details.cshtml" />
+    <Content Include="Views\Libraries\Edit.cshtml" />
+    <Content Include="Views\Libraries\Index.cshtml" />
+    <Content Include="Views\LibraryBooks\Create.cshtml" />
+    <Content Include="Views\LibraryBooks\Delete.cshtml" />
+    <Content Include="Views\LibraryBooks\Details.cshtml" />
+    <Content Include="Views\LibraryBooks\Edit.cshtml" />
+    <Content Include="Views\LibraryBooks\Index.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\RolesAdmin\Create.cshtml" />
     <Content Include="Views\RolesAdmin\Delete.cshtml" />
@@ -250,6 +293,20 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201505290407594_InitialCreate.resx">
+      <DependentUpon>201505290407594_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505290646166_ChangeISDNtoISBN.resx">
+      <DependentUpon>201505290646166_ChangeISDNtoISBN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505290710531_AddLibraryTable.resx">
+      <DependentUpon>201505290710531_AddLibraryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505290713213_AddLibraryAndBookRelation.resx">
+      <DependentUpon>201505290713213_AddLibraryAndBookRelation.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
