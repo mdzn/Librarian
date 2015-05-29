@@ -9,119 +9,162 @@ using System.Web.Mvc;
 using Librarian.Models;
 
 namespace Librarian.Controllers
-{
-    public class LibraryBooksController : Controller
+  {
+  public class LibraryBooksController : Controller
     {
-        private LibrarianDBContext db = new LibrarianDBContext();
+    private LibrarianDBContext db = new LibrarianDBContext();
 
-        // GET: LibraryBooks
-        public ActionResult Index()
+    // GET: LibraryBooks
+    public ActionResult Index(int? id)
+      {
+      if (id == null)
         {
-            return View(db.LibraryBooks.ToList());
+        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+      var libraryBooks = from b in db.LibraryBooks select b;
+      libraryBooks = libraryBooks.Where(b => b.Library.Id == id);
+
+      UpdateLibraryId(id.Value);
+      return View(libraryBooks.ToList());
+      }
+
+    // GET: LibraryBooks/Details/5
+    public ActionResult Details(int? id)
+      {
+      if (id == null)
+        {
+        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
-        // GET: LibraryBooks/Details/5
-        public ActionResult Details(int? id)
+      LibraryBook libraryBook = db.LibraryBooks.Find(id);
+      if (libraryBook == null)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LibraryBook libraryBook = db.LibraryBooks.Find(id);
-            if (libraryBook == null)
-            {
-                return HttpNotFound();
-            }
-            return View(libraryBook);
+        return HttpNotFound();
         }
 
-        // GET: LibraryBooks/Create
-        public ActionResult Create()
+      UpdateLibraryId(id.Value);
+      UpdateViewBagBookSelection();
+      return View(libraryBook);
+      }
+
+    // GET: LibraryBooks/Create
+    public ActionResult Create(int id)
+      {
+      var library = db.Libraries.Find(id);
+      var libraryBook = new LibraryBook
+      {
+        LibraryId = id,
+        Library = library
+      };
+
+      UpdateLibraryId(id);
+      UpdateViewBagBookSelection();
+      return View(libraryBook);
+      }
+
+    // POST: LibraryBooks/Create
+    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+    // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Create([Bind(Include = "Id,LibraryId,BookId,IsAvailable")] LibraryBook libraryBook)
+      {
+      var book = db.Books.Find(libraryBook.BookId);
+      var library = db.Libraries.Find(libraryBook.LibraryId);
+
+      if (ModelState.IsValid && book != null && library != null)
         {
-            return View();
+        libraryBook.Book = book;
+        libraryBook.Library = library;
+        db.LibraryBooks.Add(libraryBook);
+        db.SaveChanges();
+        return RedirectToAction("Index", new { id = libraryBook.LibraryId });
         }
 
-        // POST: LibraryBooks/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,LibraryId,BookId,CheckOut,CheckIn,CheckedOutBy")] LibraryBook libraryBook)
-        {
-            if (ModelState.IsValid)
-            {
-                db.LibraryBooks.Add(libraryBook);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+      UpdateViewBagBookSelection();
+      return View(libraryBook);
+      }
 
-            return View(libraryBook);
+    // GET: LibraryBooks/Edit/5
+    public ActionResult Edit(int? id)
+      {
+      if (id == null)
+        {
+        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
-        // GET: LibraryBooks/Edit/5
-        public ActionResult Edit(int? id)
+      UpdateLibraryId(id.Value);
+      LibraryBook libraryBook = db.LibraryBooks.Find(id);
+      if (libraryBook == null)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LibraryBook libraryBook = db.LibraryBooks.Find(id);
-            if (libraryBook == null)
-            {
-                return HttpNotFound();
-            }
-            return View(libraryBook);
+        return HttpNotFound();
         }
 
-        // POST: LibraryBooks/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,LibraryId,BookId,CheckOut,CheckIn,CheckedOutBy")] LibraryBook libraryBook)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(libraryBook).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(libraryBook);
-        }
+      UpdateViewBagBookSelection();
+      return View(libraryBook);
+      }
 
-        // GET: LibraryBooks/Delete/5
-        public ActionResult Delete(int? id)
+    // POST: LibraryBooks/Edit/5
+    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+    // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Edit([Bind(Include = "Id,LibraryId,BookId,IsAvailable")] LibraryBook libraryBook)
+      {
+      if (ModelState.IsValid)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LibraryBook libraryBook = db.LibraryBooks.Find(id);
-            if (libraryBook == null)
-            {
-                return HttpNotFound();
-            }
-            return View(libraryBook);
+        db.Entry(libraryBook).State = EntityState.Modified;
+        db.SaveChanges();
+        return RedirectToAction("Index", new { id = libraryBook.LibraryId });
         }
+      return View(libraryBook);
+      }
 
-        // POST: LibraryBooks/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+    // GET: LibraryBooks/Delete/5
+    public ActionResult Delete(int? id)
+      {
+      if (id == null)
         {
-            LibraryBook libraryBook = db.LibraryBooks.Find(id);
-            db.LibraryBooks.Remove(libraryBook);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
+      UpdateLibraryId(id.Value);
+      LibraryBook libraryBook = db.LibraryBooks.Find(id);
+      if (libraryBook == null)
+        {
+        return HttpNotFound();
+        }
+      return View(libraryBook);
+      }
 
-        protected override void Dispose(bool disposing)
+    // POST: LibraryBooks/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      UpdateLibraryId(id);
+      LibraryBook libraryBook = db.LibraryBooks.Find(id);
+      db.LibraryBooks.Remove(libraryBook);
+      db.SaveChanges();
+      return RedirectToAction("Index", new { id = libraryBook.LibraryId });
+      }
+
+    protected override void Dispose(bool disposing)
+      {
+      if (disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+        db.Dispose();
         }
+      base.Dispose(disposing);
+      }
+
+    private void UpdateViewBagBookSelection()
+      {
+      ViewBag.bookList = new SelectList(from b in db.Books select b, "Id", "Title");
+      }
+
+    private void UpdateLibraryId(int libraryId)
+      {
+      ViewBag.LibraryId = libraryId;
+      }
     }
-}
+  }
