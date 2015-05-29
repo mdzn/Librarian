@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Librarian.Models.Transaction>
+
+@{
+    ViewBag.Title = "Transations List";
+}
+
+<h2>Book Transactions</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckOut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckIn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckedOutBy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckOut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckIn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckedOutBy)
+        </td>
+        <td>
+           
+            @Html.ActionLink("Details", "Details", new { id=item.Id })
+          
+        </td>
+    </tr>
+}
+
+</table>

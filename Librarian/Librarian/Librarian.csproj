@@ -166,17 +166,14 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201505291510533_InitialCreate.cs" />
-    <Compile Include="Migrations\201505291510533_InitialCreate.Designer.cs">
-      <DependentUpon>201505291510533_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505291651489_update1.cs" />
-    <Compile Include="Migrations\201505291651489_update1.Designer.cs">
-      <DependentUpon>201505291651489_update1.cs</DependentUpon>
+    <Compile Include="Migrations\201505291946406_InitialCreate.cs" />
+    <Compile Include="Migrations\201505291946406_InitialCreate.Designer.cs">
+      <DependentUpon>201505291946406_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -203,6 +200,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\LoansModels.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -280,6 +278,8 @@
     <Content Include="Views\UsersAdmin\Details.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\Transaction\CheckOut.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
     <Content Include="Views\Reviews\Create.cshtml" />
     <Content Include="Views\Reviews\Delete.cshtml" />
     <Content Include="Views\Reviews\Details.cshtml" />
@@ -297,11 +297,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505291510533_InitialCreate.resx">
-      <DependentUpon>201505291510533_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505291651489_update1.resx">
-      <DependentUpon>201505291651489_update1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505291946406_InitialCreate.resx">
+      <DependentUpon>201505291946406_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

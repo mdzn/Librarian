@@ -32,7 +32,8 @@
                     @if (Request.IsAuthenticated && User.IsInRole("User"))
                     {
                         <li>@Html.ActionLink("Manage", "Index", "Manage")</li>
-                       
+                        <li>@Html.ActionLink("My Transactions", "Index", "Transaction")</li>
+
                     }
                   <li>@Html.ActionLink("Libraries", "Index", "Libraries")</li>
                   <li>@Html.ActionLink("Registered Books", "Index", "Books")</li>

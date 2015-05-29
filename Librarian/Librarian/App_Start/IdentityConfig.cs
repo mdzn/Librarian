@@ -114,31 +114,33 @@ namespace Librarian.Models
         public static void InitializeIdentityForEF(ApplicationDbContext db) {
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
-            const string name = "saidhdr@gmail.com";
+            const string adminUser = "admin@gmail.com";
+            const string normalUser1 = "madz@gmail.com";
+            const string normalUser2 = "heidari@gmail.com";
             const string password = "123456";
-            const string roleName = "Admin";
-            const string roleNameUser = "User";
+            const string adminRole = "Admin";
+            const string userRole = "User";
 
             //Create Role Admin if it does not exist
-            var role = roleManager.FindByName(roleName);
+            var role = roleManager.FindByName(adminRole);
             if (role == null) {
-                role = new IdentityRole(roleName);
+                role = new IdentityRole(adminRole);
                 var roleresult = roleManager.Create(role);
             }
 
             //Create Role User if it does not exist
-            var roleUser = roleManager.FindByName(roleNameUser);
+            var roleUser = roleManager.FindByName(userRole);
             if (roleUser == null)
             {
-                roleUser = new IdentityRole(roleNameUser);
+                roleUser = new IdentityRole(userRole);
                 var roleresult = roleManager.Create(roleUser);
             }
 
-            var user = userManager.FindByName(name);
-            if (user == null) {
-                user = new ApplicationUser { UserName = name, Email = name, FName = "Bruce",LName = "Waine" ,
-                                             Sex = "Male", DOB=DateTime.Now,State="Arkahm", City = "Arkahm",
-                                              Address = "Arkahm", PostalCode= "123456"};
+            //create admin user
+            var user = userManager.FindByName(adminUser);
+            if (user == null) 
+            {
+                user = CreateAdmin(adminUser);
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
@@ -148,8 +150,78 @@ namespace Librarian.Models
             if (!rolesForUser.Contains(role.Name)) {
                 var result = userManager.AddToRole(user.Id, role.Name);
             }
+
+
+            //create normal user 1
+            user = userManager.FindByName(normalUser1);
+            if (user == null)
+            {
+                user = CreateAdmin(normalUser1);
+                var result = userManager.Create(user, password);
+                result = userManager.SetLockoutEnabled(user.Id, false);
+            }
+
+            // Add user normal to Role User if not already added
+            rolesForUser = userManager.GetRoles(user.Id);
+            if (!rolesForUser.Contains(roleUser.Name))
+            {
+                var result = userManager.AddToRole(user.Id, roleUser.Name);
+            }
+
+            //create normal user 2
+            user = userManager.FindByName(normalUser2);
+            if (user == null)
+            {
+                user = CreateAdmin(normalUser2);
+                var result = userManager.Create(user, password);
+                result = userManager.SetLockoutEnabled(user.Id, false);
+            }
+
+            // Add user normal to Role User if not already added
+            rolesForUser = userManager.GetRoles(user.Id);
+            if (!rolesForUser.Contains(roleUser.Name))
+            {
+                var result = userManager.AddToRole(user.Id, roleUser.Name);
+            }
         }
+
+
+        private static ApplicationUser CreateAdmin(string userName)
+        {
+            return new ApplicationUser
+            {
+                UserName = userName,
+                Email = userName,
+                FName = "Bruce",
+                LName = "Waine",
+                Sex = "Male",
+                DOB = DateTime.Now,
+                State = "Arkahm",
+                City = "Arkahm",
+                Address = "Arkahm",
+                PostalCode = "123456"
+            };
+        }
+        private static ApplicationUser CreateUser(string userName)
+        {
+            return new ApplicationUser
+            {
+                UserName = userName,
+                Email = userName,
+                FName = "Bruce",
+                LName = "Waine",
+                Sex = "Male",
+                DOB = DateTime.Now,
+                State = "Arkahm",
+                City = "Arkahm",
+                Address = "Arkahm",
+                PostalCode = "123456"
+            };
+        }
+
     }
+
+    
 
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {
