@@ -139,6 +139,27 @@ namespace Librarian.Migrations
           Content = "Content is not very clear."
         }
         );
+
+      var boo = new LibraryBook
+      {
+          BookId = book1.Id,
+          Book = book1,
+          LibraryId = library1.Id,
+          Library = library1,
+          IsAvailable = true
+      };
+     context.Transactions.AddOrUpdate(i => i.Id,
+     new Transaction
+     {
+         LibraryBook = boo,
+         CheckedOutBy = "admin@gmail.com",
+         CheckOut = DateTime.Now,
+         CheckIn = DateTime.Now.AddDays(30)
+     }
+     
+    
+     );
+
       }
     }
   }

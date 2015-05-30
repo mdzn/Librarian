@@ -41,7 +41,7 @@ namespace Librarian.Controllers
         {
         return HttpNotFound();
         }
-      
+      libraryBook.Transactions = db.Transactions.Where(r => r.LibraryBook.BookId == libraryBook.Id).ToList();
       UpdateViewBagBookSelection();
       return View(libraryBook);
       }

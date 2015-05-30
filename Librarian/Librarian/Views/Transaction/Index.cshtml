@@ -34,9 +34,14 @@
         <td>
            
             @Html.ActionLink("Details", "Details", new { id=item.Id })
-          
+
+            @{
+                if (!item.State)
+                {
+                    @Html.ActionLink("Check in", "CheckIn", new { id = item.Id })
+                }
+            }
         </td>
     </tr>
 }
-
 </table>

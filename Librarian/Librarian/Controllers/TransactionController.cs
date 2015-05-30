@@ -42,6 +42,7 @@ namespace Librarian.Controllers
                 CheckIn = DateTime.Now.AddDays(30),
                 CheckedOutBy = User.Identity.Name,
                 LibraryBook = book,
+                State = false,
             };
 
             db.Transactions.Add(transaction);
@@ -57,25 +58,35 @@ namespace Librarian.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LibraryBook book = db.LibraryBooks.Find(id);
-            if (book == null)
+            Transaction transaction = db.Transactions.Find(id);
+            if (transaction == null)
             {
                 return HttpNotFound();
             }
 
-            var transaction = new Transaction
-            {
-                CheckOut = DateTime.Now,
-                //our current policy is returning book in 30 days, so it is just a suggetive value
-                CheckIn = DateTime.Now.AddDays(30),
-                CheckedOutBy = User.Identity.Name,
-                LibraryBook = book,
-            };
-
-            db.Transactions.Add(transaction);
+            
+            transaction.State = true;
             db.SaveChanges();
 
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Transaction transaction = db.Transactions.Find(id);
+            if (transaction == null)
+            {
+                return HttpNotFound();
+            }
+
             return View(transaction);
+            
+
+            
         }
     }
 }

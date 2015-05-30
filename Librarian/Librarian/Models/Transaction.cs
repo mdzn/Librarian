@@ -14,8 +14,9 @@ namespace Librarian.Models
     public virtual LibraryBook LibraryBook { get; set; }
     public DateTime CheckOut { get; set; }
     public DateTime CheckIn { get; set; }
-    
-      //use user.email as foregin key
+
+    public bool State { get; set; }
+    //use user.email as foregin key
     public string CheckedOutBy { get; set; } // FK for Users
 
     //[ForeignKey("Email")]
