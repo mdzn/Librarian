@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Librarian.API.Models;
 using Librarian.API.Repositories;
+using Librarian.Entities;
 using Newtonsoft.Json;
 
 namespace Librarian.API.Controllers

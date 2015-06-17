@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Http;
 using Librarian.API.Models;
 using Librarian.API.Repositories;
+using Librarian.Entities;
 using Microsoft.AspNet.Identity;
 
 namespace Librarian.API.Controllers

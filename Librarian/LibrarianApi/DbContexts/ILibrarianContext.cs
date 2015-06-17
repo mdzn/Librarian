@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Librarian.Entities;
 
 namespace Librarian.API.Models
 {

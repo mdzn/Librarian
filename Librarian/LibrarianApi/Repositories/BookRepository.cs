@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using Librarian.API.Models;
+using Librarian.Entities;
 
 namespace Librarian.API.Repositories
 {
@@ -16,7 +17,7 @@ namespace Librarian.API.Repositories
       _dbContext = new LibrarianContext();
     }
 
-    public void AddBook(Models.Book book)
+    public void AddBook(Book book)
     {
       _dbContext.Books.Add(book);
       _dbContext.SaveChanges();
@@ -35,7 +36,7 @@ namespace Librarian.API.Repositories
       return book;
     }
 
-    public void UpdateBook(Models.Book book)
+    public void UpdateBook(Book book)
     {
       _dbContext.Entry(book).State = EntityState.Modified;
       _dbContext.SaveChanges();
