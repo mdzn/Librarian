@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarianApi", "LibrarianApi\LibrarianApi.csproj", "{3F1A5FEF-AF00-4056-82BE-46B2977840A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Librarian.Api", "LibrarianApi\Librarian.Api.csproj", "{3F1A5FEF-AF00-4056-82BE-46B2977840A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarianApi.Tests", "LibrarianApi.Tests\LibrarianApi.Tests.csproj", "{A1590039-A7EC-4CCC-A2B8-486A6204249A}"
 EndProject
@@ -14,7 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0C0102
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarianClient", "Librarian\LibrarianClient.csproj", "{8E81C387-C8F5-4330-8DDD-9B571E89D928}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Librarian.Web", "Librarian\Librarian.Web.csproj", "{8E81C387-C8F5-4330-8DDD-9B571E89D928}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Librarian.Entities", "Librarian.Entities\Librarian.Entities.csproj", "{9B4156DB-5087-4D75-B41E-800BCDD4E6AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +36,10 @@ Global
 		{8E81C387-C8F5-4330-8DDD-9B571E89D928}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E81C387-C8F5-4330-8DDD-9B571E89D928}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E81C387-C8F5-4330-8DDD-9B571E89D928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B4156DB-5087-4D75-B41E-800BCDD4E6AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B4156DB-5087-4D75-B41E-800BCDD4E6AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B4156DB-5087-4D75-B41E-800BCDD4E6AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B4156DB-5087-4D75-B41E-800BCDD4E6AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
