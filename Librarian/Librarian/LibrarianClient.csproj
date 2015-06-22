@@ -185,8 +185,12 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
-    <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\BookWish.cs" />
+    <Compile Include="Models\Book.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\BookWish.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LibrarianDBContext.cs" />
     <Compile Include="Models\Library.cs">
@@ -196,8 +200,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Review.cs" />
-    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\Review.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Transaction.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -322,6 +330,12 @@
     <EmbeddedResource Include="Migrations\201505300044184_updatedb.resx">
       <DependentUpon>201505300044184_updatedb.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Librarian.Entities\Librarian.Entities.csproj">
+      <Project>{9b4156db-5087-4d75-b41e-800bcdd4e6ab}</Project>
+      <Name>Librarian.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

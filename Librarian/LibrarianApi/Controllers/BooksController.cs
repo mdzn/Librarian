@@ -18,8 +18,8 @@ namespace Librarian.API.Controllers
   [RoutePrefix("api/Book")]
   public class BooksController : ApiController
   {
-    private IBookRepository _repo;
-    public BooksController(IBookRepository repo)
+    private IRepository<Book> _repo;
+    public BooksController(IRepository<Book> repo)
     {
       _repo = repo;
     }
@@ -78,11 +78,11 @@ namespace Librarian.API.Controllers
 
       try
       {
-        _repo.UpdateBook(book);
+        _repo.Update(book);
       }
       catch (DbUpdateConcurrencyException)
       {
-        if (!_repo.BookExists(id))
+        if (!_repo.Exists(id))
         {
           return NotFound();
         }
@@ -105,7 +105,7 @@ namespace Librarian.API.Controllers
         return BadRequest(ModelState);
       }
 
-      _repo.AddBook(book);
+      _repo.Add(book);
 
       return CreatedAtRoute("DefaultApi", new { id = book.Id }, book);
     }
@@ -115,7 +115,7 @@ namespace Librarian.API.Controllers
     [ResponseType(typeof(Book))]
     public IHttpActionResult DeleteBook(int id)
     {
-      var deletedBook = _repo.DeleteBook(id);
+      var deletedBook = _repo.Delete(id);
       if (deletedBook == null)
         return NotFound();
 

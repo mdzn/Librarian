@@ -9,7 +9,7 @@ using Librarian.Entities;
 
 namespace Librarian.API.Repositories
 {
-  public class BookRepository : IBookRepository
+  public class BookRepository : IRepository<Book>
   {
     private LibrarianContext _dbContext;
     public BookRepository()
@@ -17,13 +17,13 @@ namespace Librarian.API.Repositories
       _dbContext = new LibrarianContext();
     }
 
-    public void AddBook(Book book)
+    public void Add(Book book)
     {
       _dbContext.Books.Add(book);
       _dbContext.SaveChanges();
     }
 
-    public Book DeleteBook(int id)
+    public Book Delete(int id)
     {
       Book book = _dbContext.Books.Find(id);
       if (book == null)
@@ -36,7 +36,7 @@ namespace Librarian.API.Repositories
       return book;
     }
 
-    public void UpdateBook(Book book)
+    public void Update(Book book)
     {
       _dbContext.Entry(book).State = EntityState.Modified;
       _dbContext.SaveChanges();
@@ -53,18 +53,9 @@ namespace Librarian.API.Repositories
       return _dbContext.Books.Find(id);
     }
 
-    //protected override void Dispose(bool disposing)
-    //{
-    //  if (disposing)
-    //  {
-    //    db.Dispose();
-    //  }
-    //  base.Dispose(disposing);
-    //}
-
-    public bool BookExists(int id)
+    public bool Exists(int id)
     {
-      return _dbContext.Books.Any(e => e.Id == id);
+      return _dbContext.Books.Find(id) != null;
     }
 
     public void Dispose()

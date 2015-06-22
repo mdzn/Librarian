@@ -18,5 +18,7 @@ namespace Librarian.API.Models
     public System.Data.Entity.DbSet<Book> Books { get; set; }
     public System.Data.Entity.DbSet<Author> Authors { get; set; }
     public System.Data.Entity.DbSet<BookPublisher> BookPublishers { get; set; }
+    public System.Data.Entity.DbSet<Transaction> Transactions { get; set; }
+    public System.Data.Entity.DbSet<LibraryBook> LibraryBooks { get; set; }
   }
 }

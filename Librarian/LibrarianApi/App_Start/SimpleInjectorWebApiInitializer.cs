@@ -1,5 +1,6 @@
 using Librarian.API.Repositories;
 using System.Web.Http;
+using Librarian.Entities;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 
@@ -36,7 +37,8 @@ namespace Librarian.API
       // container.RegisterWebApiRequest<IUserRepository, SqlUserRepository>();
 
       container.RegisterWebApiRequest<IAuthenticationRepository, AuthenticationRepository>();
-      container.RegisterWebApiRequest<IBookRepository, BookRepository>();
+      container.RegisterWebApiRequest<IRepository<Book>, BookRepository>();
+      container.RegisterWebApiRequest<IRepository<Transaction>, TransactionRepository>();
     }
   }
 }

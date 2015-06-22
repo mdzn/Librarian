@@ -4,11 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace Librarian.API.Models
+namespace Librarian.Entities
 {
   public class LibraryBook
   {
     public int Id { get; set; }
+    public bool IsAvailable { get; set; }
 
     [ForeignKey("BookId")]
     public virtual Book Book { get; set; }
@@ -19,5 +20,8 @@ namespace Librarian.API.Models
     public int LibraryId { get; set; }
 
     public DateTime DateAdded { get; set; }
+
+    [NotMapped]
+    public virtual ICollection<Transaction> Transactions { get; set; }
   }
 }

@@ -165,13 +165,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\SimpleInjectorWebApiInitializer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\LibraryBookController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="DbContexts\ILibrarianContext.cs" />
     <Compile Include="DbContexts\LibrarianContext.cs" />
     <Compile Include="Providers\AuthorizationServerProvider.cs" />
@@ -181,7 +184,8 @@
     <Compile Include="Repositories\IAuthenticationRepository.cs" />
     <Compile Include="DbContexts\AuthenticationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IBookRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\TransactionRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
